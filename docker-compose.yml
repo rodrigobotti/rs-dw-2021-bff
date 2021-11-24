@@ -26,5 +26,9 @@ services:
     build: ./services/product-catalog-service
     <<: *domain-service
 
+  order-service:
+    build: ./services/order-service
+    <<: *domain-service
+
 networks:
   bff-example:
