@@ -131,7 +131,7 @@ const AuthService = (userRepository, tokenService) => {
     tokenService
       .validateToken(token)
       .then(R.pick(['username', 'roles']))
-      .catch(error => AppError(ErrorCodes.InvalidToken, error.message))
+      .catch(error => Promise.reject(AppError(ErrorCodes.InvalidToken, error.message)))
 
   return {
     authenticate,
@@ -152,7 +152,7 @@ const login = ctx =>
 const validate = ctx =>
   authService
     .validate(ctx.request.body.token)
-    .then(() => (ctx.body = { valid: true }))
+    .then(user => (ctx.body = user))
 
 const errorMiddleware = (ctx, next) =>
   next()
