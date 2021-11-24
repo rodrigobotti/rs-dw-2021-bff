@@ -38,6 +38,12 @@ services:
       - 4000:4000
     <<: *bff-service
 
+  buyer-mobile-bff:
+    build: ./bffs/buyer-mobile-bff
+    ports:
+      - 4001:4000
+    <<: *bff-service
+
   user-identity-service:
     build: ./services/user-identity-service
     <<: *domain-service

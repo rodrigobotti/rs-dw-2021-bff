@@ -10,5 +10,9 @@ indent_style = space
 [*.{js,jsx,html,json,yml,ts}]
 indent_size = 2
 
+[{Makefile,Makefile.shared}]
+indent_style = tab
+indent_size = 4
+
 [*.md]
 trim_trailing_whitespace = false

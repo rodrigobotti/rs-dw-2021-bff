@@ -64,7 +64,7 @@ const getProfile = ctx =>
 
 const getAddress = ctx =>
   getById(database.addresses, ctx.params.id)
-    .then(profile => (ctx.body = { profile }))
+    .then(address => (ctx.body = { address }))
 
 const errorMiddleware = (ctx, next) =>
   next()
