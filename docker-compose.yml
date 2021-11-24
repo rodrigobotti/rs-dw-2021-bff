@@ -12,7 +12,31 @@ x-domain-service: &domain-service
         cpus: '0.5'
         memory: 128M
 
+x-bff-service: &bff-service
+  networks:
+    - bff-example
+  expose:
+    - 4000
+  environment:
+    - USER_IDENTITY_SERVICE_URL=http://user-identity-service:3000/api
+    - BUYER_SERVICE_URL=http://buyer-service:3000/api
+    - PRODUCT_CATALOG_SERVICE_URL=http://product-catalog-service:3000/api
+    - ORDER_SERVICE_URL=http://order-service:3000/api
+    - API_HOST=0.0.0.0
+    - API_PORT=4000
+  deploy:
+    resources:
+      limits:
+        cpus: '0.5'
+        memory: 128M
+
 services:
+
+  backoffice-web-bff:
+    build: ./bffs/backoffice-web-bff
+    ports:
+      - 4000:4000
+    <<: *bff-service
 
   user-identity-service:
     build: ./services/user-identity-service

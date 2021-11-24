@@ -112,8 +112,8 @@ const listAllOrders = ctx => {
 
   const orders = (
     buyer
-      ? database.orders.filter(R.propEq('buyerId', buyer))
-      : database.orders
+      ? database.orders.reverse().filter(R.propEq('buyerId', buyer))
+      : database.orders.reverse()
   ).slice(offset, offset + limit + 1)
 
   const { result, nextOffset } = paginate(offset, limit, orders)
