@@ -1,20 +1,26 @@
 version: '3'
 
+x-domain-service: &domain-service
+  environment:
+    - API_PORT=3000
+    - API_HOST=0.0.0.0
+  networks:
+    - bff-example
+  deploy:
+    resources:
+      limits:
+        cpus: '0.5'
+        memory: 128M
+
 services:
 
   user-identity-service:
     build: ./services/user-identity-service
-    command: 'npm run start:address'
-    environment:
-      - API_PORT=3000
-      - API_HOST=0.0.0.0
-    networks:
-      - bff-example
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 128M
+    <<: *domain-service
+
+  buyer-service:
+    build: ./services/buyer-service
+    <<: *domain-service
 
 networks:
   bff-example:
