@@ -22,5 +22,9 @@ services:
     build: ./services/buyer-service
     <<: *domain-service
 
+  product-catalog-service:
+    build: ./services/product-catalog-service
+    <<: *domain-service
+
 networks:
   bff-example:
